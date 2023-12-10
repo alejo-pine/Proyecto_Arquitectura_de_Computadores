@@ -13,7 +13,7 @@
 
     <div class="container-carga-instrucciones">
       <mat-form-field class="container__body__principal__input">
-        <mat-label>Comandos de la simulación</mat-label>
+        <mat-label>Comandos de la <br>simulación</mat-label>
         <textarea matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
       </mat-form-field>
       <div>
@@ -26,7 +26,7 @@
         Unidad de control
       </div>
       <div class="container__body__principal__center__ALU" [ngClass]="{'elemento__procesador__activo': aluEstaActiva}">
-        <div>
+        <div class="container__span__alu">
           <div>
             <span>{{ALU.operando1}}</span> ***** <span>{{ALU.operando2}}</span>
           </div>
@@ -38,7 +38,7 @@
       <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
         <div>
             Almacén general
-            <br>
+            <br><br><br>
           <div>
             Ax: {{almacenGeneral.A}} - Bx: {{almacenGeneral.B}} <br>
             Cx: {{almacenGeneral.C}} - Dx: {{almacenGeneral.D}} <br>
@@ -74,32 +74,31 @@
 
     <div class="container-buses-principales">
       <div class="buses__container">
-        <div class="directions" [ngClass]="{'elemento__procesador__activo': busDireccionesEstaActivo}"></div>
-        <div class="bus_name">Bus de direcciones</div>
+        <div class="directions" [ngClass]="{'elemento__procesador__activo': busDireccionesEstaActivo}">Bus de direcciones</div>
       </div>
-      <div>
-        <div class="data" [ngClass]="{'elemento__procesador__activo': busDatosEstaActivo}"></div>
-        <div class="bus_name">Bus de datos</div>
+      <div class="buses__container">
+        <div class="data" [ngClass]="{'elemento__procesador__activo': busDatosEstaActivo}">Bus de datos</div>
       </div>
-      <div>
-        <div class="control" [ngClass]="{'elemento__procesador__activo': busControlEstaActivo}"></div>
-        <div class="bus_name">Bus de control</div>
+      <div class="buses__container">
+        <div class="control" [ngClass]="{'elemento__procesador__activo': busControlEstaActivo}">Bus de control</div>
       </div>
     </div>
 
-    <mat-card class="container__body__principal__card" [ngClass]="{'elemento__procesador__activo': memoriaEstaActiva}">
-      <mat-card-title>Memoria principal</mat-card-title>
-      <mat-card-content>
-        <div *ngFor="let instruccion of memoria.celdas; index as index">
-          {{index+1}} - {{instruccion}}
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>
-        OUTPUT
-      </mat-card-title>
-    </mat-card>
+    <div class="container-componentes-finales">
+      <mat-card class="container__body__principal__card" [ngClass]="{'elemento__procesador__activo': memoriaEstaActiva}">
+        <mat-card-title>Memoria principal</mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let instruccion of memoria.celdas; index as index">
+            {{index+1}} - {{instruccion}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="container__output">
+        <mat-card-title>
+          OUTPUT
+        </mat-card-title>
+      </mat-card>
+    </div>
 
   </div>
 </body>
