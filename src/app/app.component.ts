@@ -30,7 +30,9 @@ export class AppComponent {
   memoria: Memoria = new Memoria();
   almacenGeneral: AlmacenGeneral = new AlmacenGeneral();
 
-  constructor(private ejecutarTareaService: EjecutarTareaService) {
+  constructor(
+    private ejecutarTareaService: EjecutarTareaService
+    ) {
     this.estadoComputador = EstadoComputador.SIN_INICIAR;
     this.elementoActivo = ElementoProcesador.UNIDAD_CONTROL;
   }
@@ -53,44 +55,49 @@ export class AppComponent {
     return this.PC < this.memoria.celdas.length;
   }
 
+  //Flujo de captacion de instrucciones	
+
   private async ejecutarInstruccionesGuardadas() {
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.PC;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.MAR;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.MAR = this.PC;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.BUS_CONTROL;
+    })
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.BUS_DIRECCIONES;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.MEMORIA;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.BUS_DATOS;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.MBR;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.MBR = this.memoria.obtenerInstruccion(this.PC);
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.IR;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.IR = this.MBR;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.UNIDAD_CONTROL;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(async () => {
+    await this.ejecutarTareaService.ejecutarTarea(async () => {
       await this.ejecutarInstruccion();
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.UNIDAD_CONTROL;
     })
     if (this.hayLineaPorEjecutar()) {
@@ -134,18 +141,15 @@ export class AppComponent {
 
 
   // Ejecucion de instrucciones
-  // -------------------------------
-  // -------------------------------
-  // -------------------------------
-  // -------------------------------
+  
   private async ejecutarInstruccionLoad(variableAGuardar: number | VariableInstruccion | undefined, numero: number | VariableInstruccion | undefined): Promise<void> {
     if (variableAGuardar == undefined || numero == undefined) {
       return;
     }
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       switch(variableAGuardar) {
         case VariableInstruccion.A:
           this.almacenGeneral.A = numero;
@@ -215,10 +219,10 @@ export class AppComponent {
     if (operando1 == undefined || operando2 == undefined) {
       return 0;
     }
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.ALU;
     })
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
     })
     const numero1 = this.obtenerValorAlmacenGeneral(operando1);
@@ -257,7 +261,7 @@ export class AppComponent {
     if (variableOrigen == undefined || variableDestino == undefined) {
       return;
     }
-    await this.ejecutarTareaService.ejecutarTareaDespuesDeCiertoTiempo(() => {
+    await this.ejecutarTareaService.ejecutarTarea(() => {
       this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
     })
     switch(variableDestino) {
