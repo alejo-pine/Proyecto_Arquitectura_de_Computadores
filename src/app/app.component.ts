@@ -29,7 +29,7 @@ export class AppComponent {
   ALU: ALU = new ALU();
   memoria: Memoria = new Memoria();
   almacenGeneral: AlmacenGeneral = new AlmacenGeneral();
-  output: number=0;
+  output: number | string = '';
 
   constructor(
     private ejecutarTareaService: EjecutarTareaService
@@ -115,7 +115,6 @@ export class AppComponent {
     const operando1: number | VariableInstruccion | undefined = this.IR.operando1;
     const operando2: number | VariableInstruccion | undefined = this.IR.operando2;
     const operando3: number | VariableInstruccion | undefined = this.IR.operando3;
-
     switch (operacion) {
       case OperacionInstruccion.LOAD:
         await this.ejecutarInstruccionLoad(operando1, operando2);
@@ -150,6 +149,10 @@ export class AppComponent {
       case OperacionInstruccion.HALT:
         this.estadoComputador = EstadoComputador.PAUSADO;
         this.PC = this.memoria.celdas.length;
+        this.MAR = this.PC;
+        break;
+      case OperacionInstruccion.OUT:
+        this.output = this.obtenerValorAlmacenGeneral(operando1);
         break;
       default:
         break;

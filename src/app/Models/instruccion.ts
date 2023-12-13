@@ -45,6 +45,8 @@ export class Instruccion {
         return OperacionInstruccion.OR;
       case "HALT":
         return OperacionInstruccion.HALT;
+      case "OUT":
+        return OperacionInstruccion.OUT;
       default:
         return undefined;
     }

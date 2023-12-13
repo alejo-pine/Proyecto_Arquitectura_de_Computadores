@@ -9,5 +9,6 @@ export enum OperacionInstruccion {
   INC = 'INCREMENTAR',
   AND = 'CONJUNCION',
   OR = 'DISYUNCION',
-  NOT = 'NEGACION'
+  NOT = 'NEGACION',
+  OUT = 'SALIDA'
 }
