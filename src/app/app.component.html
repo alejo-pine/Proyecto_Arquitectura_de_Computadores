@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="app.component.css">
 </head>
 
@@ -12,11 +13,13 @@
   <div class="container_body_principal">
 
     <div class="container-carga-instrucciones">
-      <mat-form-field class="container__body__principal__input">
-        <mat-label>Instrucciones</mat-label>
-        <textarea id="text-area__imput" matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
-      </mat-form-field>
-      <div>
+      <div class="subcontainer-instrucciones">
+        <mat-form-field class="container__body__principal__input">
+          <mat-label>Instrucciones</mat-label>
+          <textarea id="text-area__imput" matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="subcontainer-button">
         <button class="header__button" mat-raised-button color="primary" (click)="cargarYEjecutarInstrucciones()" [disabled]="!habilitarBtnEjecutar"><mat-icon>play_arrow</mat-icon>Iniciar</button>
       </div>
     </div>
