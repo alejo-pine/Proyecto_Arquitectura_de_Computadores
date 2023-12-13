@@ -12,7 +12,7 @@ import { VariableInstruccion } from './Enums/variable-instruccion';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./reset.css', './app.component.css'],
 })
 export class AppComponent {
 
