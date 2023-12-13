@@ -147,6 +147,10 @@ export class AppComponent {
       case OperacionInstruccion.OR:
         await this.ejecutarInstruccionMatematica(OperacionInstruccion.OR, operando1, operando2, operando3);
         break;
+      case OperacionInstruccion.HALT:
+        this.estadoComputador = EstadoComputador.PAUSADO;
+        this.PC = this.memoria.celdas.length;
+        break;
       default:
         break;
     }
@@ -154,7 +158,7 @@ export class AppComponent {
 
 
   // Ejecucion de instrucciones
-  
+  // Cargar
   private async ejecutarInstruccionLoad(variableAGuardar: number | VariableInstruccion | undefined, numero: number | VariableInstruccion | undefined): Promise<void> {
     if (variableAGuardar == undefined || numero == undefined) {
       return;
@@ -194,6 +198,7 @@ export class AppComponent {
     })
   }
 
+  //Matematicas
   private async ejecutarInstruccionMatematica(tipoOperacion: OperacionInstruccion, primeraVariable: number | VariableInstruccion | undefined, segundaVariable: number | VariableInstruccion | undefined, variableDestino: number | VariableInstruccion | undefined): Promise<void> {
     if (primeraVariable == undefined || segundaVariable == undefined) {
       return;
@@ -414,10 +419,6 @@ export class AppComponent {
 
 
   // Getters de estado de la interfaz
-  // -------------------------------
-  // -------------------------------
-  // -------------------------------
-  // -------------------------------
   get habilitarBtnEjecutar(): boolean {
     return this.estadoComputador == EstadoComputador.SIN_INICIAR;
   }
