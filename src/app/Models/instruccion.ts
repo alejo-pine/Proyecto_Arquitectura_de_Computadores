@@ -39,6 +39,12 @@ export class Instruccion {
         return OperacionInstruccion.INC;
       case "NOT":
         return OperacionInstruccion.NOT;
+      case "AND":
+        return OperacionInstruccion.AND;
+      case "OR":
+        return OperacionInstruccion.OR;
+      case "HALT":
+        return OperacionInstruccion.HALT;
       default:
         return undefined;
     }

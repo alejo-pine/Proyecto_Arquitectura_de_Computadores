@@ -29,6 +29,7 @@ export class AppComponent {
   ALU: ALU = new ALU();
   memoria: Memoria = new Memoria();
   almacenGeneral: AlmacenGeneral = new AlmacenGeneral();
+  output: number=0;
 
   constructor(
     private ejecutarTareaService: EjecutarTareaService
@@ -139,6 +140,12 @@ export class AppComponent {
         break;
       case OperacionInstruccion.NOT:
         await this.ejecutarInstruccionNot(operando1);
+        break;
+      case OperacionInstruccion.AND:
+        await this.ejecutarInstruccionMatematica(OperacionInstruccion.AND, operando1, operando2, operando3);
+        break;
+      case OperacionInstruccion.OR:
+        await this.ejecutarInstruccionMatematica(OperacionInstruccion.OR, operando1, operando2, operando3);
         break;
       default:
         break;

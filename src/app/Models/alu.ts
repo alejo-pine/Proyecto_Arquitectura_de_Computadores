@@ -27,6 +27,10 @@ export class ALU {
         return this.incrementar(operando1, operando2);
       case OperacionInstruccion.NOT:
         return this.negar(operando1)
+      case OperacionInstruccion.AND:
+        return this.conjuncion(operando1, operando2);
+      case OperacionInstruccion.OR:
+        return this.disyuncion(operando1, operando2);
       default:
         return 0;
     }
@@ -66,6 +70,22 @@ export class ALU {
       return 0;
     }else{
       return operando1 * -1;
+    }
+  }
+
+  private conjuncion(operando1: number, operando2: number): number {
+    if(operando1 == 1 && operando2 == 1){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
+
+  private disyuncion(operando1: number, operando2: number): number {
+    if(operando1 == 0 && operando2 == 0){
+      return 0;
+    }else{
+      return 1;
     }
   }
 }
