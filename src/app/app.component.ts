@@ -137,6 +137,9 @@ export class AppComponent {
       case OperacionInstruccion.INC:
         await this.ejecutarInstruccionInc(operando1, operando2);
         break;
+      case OperacionInstruccion.NOT:
+        await this.ejecutarInstruccionNot(operando1);
+        break;
       default:
         break;
     }
@@ -347,6 +350,58 @@ export class AppComponent {
       this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
     })
     const resultadoOperacion = this.ALU.ejecutarOperacion(operacion, operando1, operando2 ?? 1);
+    return resultadoOperacion;
+  }
+
+  //Negar
+  private async ejecutarInstruccionNot(variableOrigen: VariableInstruccion | undefined): Promise<void> {
+    if (variableOrigen == undefined) {
+      return;
+    }
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
+    })
+    switch(variableOrigen) {
+      case VariableInstruccion.A:
+        this.almacenGeneral.A = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.A);
+        break;
+      case VariableInstruccion.B:
+        this.almacenGeneral.B = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.B);
+        break;
+      case VariableInstruccion.C:
+        this.almacenGeneral.C = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.C);
+        break;
+      case VariableInstruccion.D:
+        this.almacenGeneral.D = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.D);
+        break;
+      case VariableInstruccion.E:
+        this.almacenGeneral.E = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.E);
+        break;
+      case VariableInstruccion.F:
+        this.almacenGeneral.F = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.F);
+        break;
+      case VariableInstruccion.G:
+        this.almacenGeneral.G = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.G);
+        break;
+      case VariableInstruccion.H:
+        this.almacenGeneral.H = await this.ejecutarOperacionALUNot(OperacionInstruccion.NOT, this.almacenGeneral.H);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private async ejecutarOperacionALUNot(operacion: OperacionInstruccion, operando1: number | VariableInstruccion | undefined): Promise<number> {
+    if (operando1 == undefined) {
+      return 0;
+    }
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALU;
+    })
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
+    })
+    const resultadoOperacion = this.ALU.ejecutarOperacion(operacion, operando1, 0);
     return resultadoOperacion;
   }
 

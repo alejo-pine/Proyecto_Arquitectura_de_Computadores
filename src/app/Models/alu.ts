@@ -25,6 +25,8 @@ export class ALU {
         return this.dividir(operando1, operando2);
       case OperacionInstruccion.INC:
         return this.incrementar(operando1, operando2);
+      case OperacionInstruccion.NOT:
+        return this.negar(operando1)
       default:
         return 0;
     }
@@ -49,10 +51,21 @@ export class ALU {
       return 0;
     }
   }
+
   private incrementar(operando1: number, operando2: number): number {
     if (operando2 == undefined || operando2 == null || operando2 == 0){
       operando2 = 1;
     }
     return operando1 += operando2;
+  }
+
+  private negar(operando1: number): number {
+    if(operando1 == 0){
+      return 1;
+    }else if(operando1 == 1){
+      return 0;
+    }else{
+      return operando1 * -1;
+    }
   }
 }
