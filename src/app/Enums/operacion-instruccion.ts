@@ -10,5 +10,9 @@ export enum OperacionInstruccion {
   AND = 'CONJUNCION',
   OR = 'DISYUNCION',
   NOT = 'NEGACION',
-  OUT = 'SALIDA'
+  OUT = 'SALIDA',
+  IN = 'ENTRADA',
+  JMP = 'SALTO',
+  JNE = 'SALTO SI NO IGUAL',
+  CMP = 'COMPARAR'
 }

@@ -154,6 +154,9 @@ export class AppComponent {
       case OperacionInstruccion.OUT:
         this.output = this.obtenerValorAlmacenGeneral(operando1);
         break;
+      case OperacionInstruccion.CMP:
+        await this.ejecutarInstruccionMatematica(OperacionInstruccion.CMP, operando1, operando2, operando3);
+        break;
       default:
         break;
     }

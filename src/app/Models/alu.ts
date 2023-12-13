@@ -31,6 +31,8 @@ export class ALU {
         return this.conjuncion(operando1, operando2);
       case OperacionInstruccion.OR:
         return this.disyuncion(operando1, operando2);
+      case OperacionInstruccion.CMP:
+        return this.comparar(operando1, operando2);
       default:
         return 0;
     }
@@ -86,6 +88,16 @@ export class ALU {
       return 0;
     }else{
       return 1;
+    }
+  }
+
+  private comparar(operando1: number, operando2: number): number {
+    if(operando1 == operando2){
+      return 0;
+    }else if(operando1 > operando2){
+      return 1;
+    }else{
+      return -1;
     }
   }
 }

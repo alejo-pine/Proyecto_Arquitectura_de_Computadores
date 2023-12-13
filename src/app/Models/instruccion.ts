@@ -47,6 +47,14 @@ export class Instruccion {
         return OperacionInstruccion.HALT;
       case "OUT":
         return OperacionInstruccion.OUT;
+      case "CMP":
+        return OperacionInstruccion.CMP;
+      case "JMP":
+        return OperacionInstruccion.JMP;
+      case "JNE":
+        return OperacionInstruccion.JNE;
+      case "IN":
+        return OperacionInstruccion.IN;
       default:
         return undefined;
     }
