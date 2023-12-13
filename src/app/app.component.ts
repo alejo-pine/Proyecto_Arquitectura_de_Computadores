@@ -104,6 +104,8 @@ export class AppComponent {
     if (this.hayLineaPorEjecutar()) {
       this.PC++;
       this.ejecutarInstruccionesGuardadas();
+    }else{
+      this.estadoComputador = EstadoComputador.FINALIZADO;
     }
   }
 
@@ -147,7 +149,6 @@ export class AppComponent {
         await this.ejecutarInstruccionMatematica(OperacionInstruccion.OR, operando1, operando2, operando3);
         break;
       case OperacionInstruccion.HALT:
-        this.estadoComputador = EstadoComputador.PAUSADO;
         this.PC = this.memoria.celdas.length;
         this.MAR = this.PC;
         break;
