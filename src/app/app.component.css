@@ -46,12 +46,15 @@ body {
   justify-content: center;
 }
 
-
-
 .container__body__principal__input {
   width: 100%;
   height: 60%;
 }
+
+#text-area__imput{
+  height: 200px;
+}
+
 
 .container__body__principal__card {
   width: 100%;

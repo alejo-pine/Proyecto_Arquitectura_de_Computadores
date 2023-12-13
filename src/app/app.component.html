@@ -14,7 +14,7 @@
     <div class="container-carga-instrucciones">
       <mat-form-field class="container__body__principal__input">
         <mat-label>Instrucciones</mat-label>
-        <textarea matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
+        <textarea id="text-area__imput" matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
       </mat-form-field>
       <div>
         <button class="header__button" mat-raised-button color="primary" (click)="cargarYEjecutarInstrucciones()" [disabled]="!habilitarBtnEjecutar"><mat-icon>play_arrow</mat-icon>Iniciar</button>
