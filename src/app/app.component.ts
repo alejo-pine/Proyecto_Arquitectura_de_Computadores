@@ -134,6 +134,9 @@ export class AppComponent {
       case OperacionInstruccion.MOVE:
         await this.ejecutarInstruccionMove(operando1, operando2);
         break;
+      case OperacionInstruccion.INC:
+        await this.ejecutarInstruccionInc(operando1, operando2);
+        break;
       default:
         break;
     }
@@ -257,6 +260,7 @@ export class AppComponent {
     }
   }
 
+  //Mover
   private async ejecutarInstruccionMove(variableOrigen: number | VariableInstruccion | undefined, variableDestino: number | VariableInstruccion | undefined): Promise<void> {
     if (variableOrigen == undefined || variableDestino == undefined) {
       return;
@@ -294,6 +298,57 @@ export class AppComponent {
     }
   }
 
+  //Incrementar
+  private async ejecutarInstruccionInc(variableOrigen: VariableInstruccion | undefined, numero: number | VariableInstruccion | undefined): Promise<void> {
+    if (variableOrigen == undefined) {
+      return;
+    }
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
+    })
+    switch(variableOrigen) {
+      case VariableInstruccion.A:
+        this.almacenGeneral.A = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.A, numero);
+        break;
+      case VariableInstruccion.B:
+        this.almacenGeneral.B = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.B, numero);
+        break;
+      case VariableInstruccion.C:
+        this.almacenGeneral.C = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.C, numero);
+        break;
+      case VariableInstruccion.D:
+        this.almacenGeneral.D = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.D, numero);
+        break;
+      case VariableInstruccion.E:
+        this.almacenGeneral.E = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.E, numero);
+        break;
+      case VariableInstruccion.F:
+        this.almacenGeneral.F = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.F, numero);
+        break;
+      case VariableInstruccion.G:
+        this.almacenGeneral.G = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.G, numero);
+        break;
+      case VariableInstruccion.H:
+        this.almacenGeneral.H = await this.ejecutarOperacionALUInc(OperacionInstruccion.INC, this.almacenGeneral.H, numero);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private async ejecutarOperacionALUInc(operacion: OperacionInstruccion, operando1: number | VariableInstruccion | undefined, operando2: number | VariableInstruccion | undefined): Promise<number> {
+    if (operando1 == undefined) {
+      return 0;
+    }
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALU;
+    })
+    await this.ejecutarTareaService.ejecutarTarea(() => {
+      this.elementoActivo = ElementoProcesador.ALMACEN_GENERAL;
+    })
+    const resultadoOperacion = this.ALU.ejecutarOperacion(operacion, operando1, operando2 ?? 1);
+    return resultadoOperacion;
+  }
 
 
   // Getters de estado de la interfaz

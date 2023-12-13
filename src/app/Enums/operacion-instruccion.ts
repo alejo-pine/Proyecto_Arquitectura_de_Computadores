@@ -5,5 +5,9 @@ export enum OperacionInstruccion {
   MUL = 'MULTIPLICAR',
   DIV = 'DIVIDIR',
   MOVE = 'MOVER',
-
+  HALT = 'DETENER',
+  INC = 'INCREMENTAR',
+  AND = 'CONJUNCION',
+  OR = 'DISYUNCION',
+  NOT = 'NEGACION'
 }

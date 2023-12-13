@@ -35,6 +35,8 @@ export class Instruccion {
         return OperacionInstruccion.DIV;
       case "MOVE":
         return OperacionInstruccion.MOVE;
+      case "INC":
+        return OperacionInstruccion.INC;
       default:
         return undefined;
     }
